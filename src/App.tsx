@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import MainLayout from './layouts/MainLayout';
+import Home from './pages/Home';
+import InterviewSelect from './pages/InterviewSelect';
+import WrittenInterview from './pages/WrittenInterview';
+import AudioInterview from './pages/AudioInterview';
+import Results from './pages/Results';
+import Dashboard from './pages/Dashboard';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<Home />} />
+        <Route path="interview-select" element={<InterviewSelect />} />
+        <Route path="interview/written/:domainId" element={<WrittenInterview />} />
+        <Route path="interview/audio/:domainId" element={<AudioInterview />} />
+        <Route path="results" element={<Results />} />
+        <Route path="results/:interviewId" element={<Results />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="*" element={<div className="text-center p-10">Page non trouvée</div>} />
+      </Route>
+    </Routes>
   );
-}
+};
 
 export default App;
